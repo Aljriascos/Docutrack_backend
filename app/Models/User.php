@@ -23,6 +23,8 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'name',
         'email',
         'password',
+        'document_id',
+        'direction',
     ];
 
     /**
@@ -46,6 +48,11 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function profiles()
+    {
+        return $this->belongsToMany(Profile::class);
     }
 
     public function getJWTIdentifier()

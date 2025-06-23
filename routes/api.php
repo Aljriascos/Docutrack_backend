@@ -7,13 +7,14 @@ use Illuminate\Support\Facades\Route;
 
 // Registro
 Route::post('register', [RegisterController::class, 'register']);
-
 // Login
 Route::post('login', [AuthController::class, 'login']);
 
 // Email verification
 Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
-Route::post('email/resend', [VerificationController::class, 'resend'])->middleware(['auth:api'])->name('verification.resend');
+Route::post('email/resend', [VerificationController::class, 'resend'])
+    ->middleware(['auth:api'])
+    ->name('verification.resend');
 
 // Protegido
 Route::middleware(['auth:api', 'verified'])->group(function () {
